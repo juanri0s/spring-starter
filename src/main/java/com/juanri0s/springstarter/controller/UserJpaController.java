@@ -3,13 +3,16 @@ package com.juanri0s.springstarter.controller;
 import com.juanri0s.springstarter.entity.UserEntity;
 import com.juanri0s.springstarter.model.FieldErrorMessage;
 import com.juanri0s.springstarter.service.UserJpaService;
+import javafx.application.Application;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -23,17 +26,17 @@ public class UserJpaController {
 
   @Autowired private UserJpaService userService;
 
-  @GetMapping("/user/{userId}")
+  @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Optional<UserEntity> readOne(@PathVariable @NotEmpty Integer userId) {
     return userService.findById(userId);
   }
 
-  @GetMapping("/user")
+  @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<UserEntity> readAll() {
     return userService.findAll();
   }
 
-  @PostMapping("/user")
+  @PostMapping(value = "/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public UserEntity create(@Valid @RequestBody UserEntity user) {
     userService.save(user);
     return user;
