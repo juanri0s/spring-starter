@@ -1,4 +1,4 @@
-package com.juanri0s.springstarter;
+package com.juanri0s.springstarter.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp.BasicDataSource;
