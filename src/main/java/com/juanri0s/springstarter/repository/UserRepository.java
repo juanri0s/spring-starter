@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
@@ -14,5 +15,5 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
 
   List<UserEntity> findAll();
 
-//  UserEntity findByName(String firstName);
+  Optional<UserEntity> findById(Integer userId);
 }

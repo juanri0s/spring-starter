@@ -14,27 +14,25 @@ import javax.sql.DataSource;
 @Configuration
 public class JpaConfig {
 
-    @Value("${spring.datasource.driver-class-name}")
-    private String driverClassName;
+  @Value("${spring.datasource.driver-class-name}")
+  private String driverClassName;
 
-    @Value("${spring.datasource.url}")
-    private String datasourceUrl;
+  @Value("${spring.datasource.url}")
+  private String datasourceUrl;
 
-    @Value("${spring.datasource.username}")
-    private String username;
+  @Value("${spring.datasource.username}")
+  private String username;
 
-    @Value("${spring.datasource.password}")
-    private String password;
+  @Value("${spring.datasource.password}")
+  private String password;
 
   @Bean
   public DataSource getDataSource() {
-      BasicDataSource dataSource = new BasicDataSource();
-      dataSource.setDriverClassName(driverClassName);
-      dataSource.setUrl(datasourceUrl);
-      dataSource.setUsername(username);
-      dataSource.setPassword(password);
-
-      log.info("using {} {} {} {}", driverClassName, dataSource.toString(), username, password);
-      return dataSource;
+    BasicDataSource dataSource = new BasicDataSource();
+    dataSource.setDriverClassName(driverClassName);
+    dataSource.setUrl(datasourceUrl);
+    dataSource.setUsername(username);
+    dataSource.setPassword(password);
+    return dataSource;
   }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -26,10 +27,10 @@ public class UserController {
     return "spring-starter server working!";
   }
 
-//  @GetMapping("/user/{firstName}")
-//  public UserEntity readOne(@PathVariable @NotEmpty String firstName) {
-//    return userService.findByName(firstName);
-//  }
+  @GetMapping("/user/{userId}")
+  public Optional<UserEntity> readOne(@PathVariable @NotEmpty Integer userId) {
+    return userService.findById(userId);
+  }
 
   @GetMapping("/user")
   public List<UserEntity> readAll() {
