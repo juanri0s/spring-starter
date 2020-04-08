@@ -9,9 +9,9 @@ import lombok.Data;
 @AllArgsConstructor
 @ApiModel(value = "FieldErrorMessage", description = "Error object for BAD_REQUEST on a field")
 public class FieldErrorMessage {
-  @ApiModelProperty(value = "Validation error field")
+  @ApiModelProperty(value = "Validation error field", example = "firstName")
   private String field;
 
-  @ApiModelProperty(value = "Validation error message")
+  @ApiModelProperty(value = "Validation error message", example = "firstName cannot be empty")
   private String message;
 }

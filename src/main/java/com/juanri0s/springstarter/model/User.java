@@ -23,13 +23,13 @@ public class User {
   @NotEmpty
   @Size(min = 2, message = "First name must not be less than 2 characters")
   @Column(name = "firstname", nullable = false)
-  @ApiModelProperty(value = "User first name", required = true)
+  @ApiModelProperty(value = "User first name", example = "Terry", required = true)
   private String firstName;
 
   @NonNull
   @NotEmpty
   @Size(min = 2, message = "Last name must not be less than 2 characters")
   @Column(name = "lastname", nullable = false)
-  @ApiModelProperty(value = "User last name", required = true)
+  @ApiModelProperty(value = "User last name", example = "Crews", required = true)
   private String lastName;
 }
