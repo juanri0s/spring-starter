@@ -2,7 +2,7 @@ package com.juanri0s.springstarter.controller;
 
 import com.juanri0s.springstarter.entity.UserEntity;
 import com.juanri0s.springstarter.model.FieldErrorMessage;
-import com.juanri0s.springstarter.service.UserService;
+import com.juanri0s.springstarter.service.UserJpaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,14 +18,10 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-public class UserController {
+@RequestMapping("api/jpa")
+public class UserJpaController {
 
-  @Autowired private UserService userService;
-
-  @GetMapping("/")
-  public String Test() {
-    return "spring-starter server working!";
-  }
+  @Autowired private UserJpaService userService;
 
   @GetMapping("/user/{userId}")
   public Optional<UserEntity> readOne(@PathVariable @NotEmpty Integer userId) {
