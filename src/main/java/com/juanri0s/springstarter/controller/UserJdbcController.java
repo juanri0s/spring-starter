@@ -3,6 +3,7 @@ package com.juanri0s.springstarter.controller;
 import com.juanri0s.springstarter.model.FieldErrorMessage;
 import com.juanri0s.springstarter.model.User;
 import com.juanri0s.springstarter.service.UserJdbcService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -21,10 +22,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("api/jdbc")
+@Api(value = "/api/jdbc", tags = "User JDBC")
 public class UserJdbcController {
   @Autowired private UserJdbcService userService;
 
-  @ApiOperation(value = "Get all users")
+  @ApiOperation(value = "Get all users", response = User.class)
   @ApiResponses({@ApiResponse(code = 200, message = "List of all users")})
   @GetMapping(
       value = "/user",
@@ -35,8 +37,12 @@ public class UserJdbcController {
   }
 
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "Create user")
-  @ApiResponses({@ApiResponse(code = 201, message = "User created")})
+  @ApiOperation(value = "Create user", response = User.class)
+  @ApiResponses(
+      value = {
+        @ApiResponse(code = 201, message = "User created"),
+        @ApiResponse(code = 400, response = FieldErrorMessage.class, message = "Error with request")
+      })
   @PostMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
   public User create(@Valid @RequestBody User user) {
     userService.save(user);
