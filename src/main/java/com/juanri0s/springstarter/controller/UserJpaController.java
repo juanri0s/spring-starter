@@ -3,7 +3,10 @@ package com.juanri0s.springstarter.controller;
 import com.juanri0s.springstarter.entity.UserEntity;
 import com.juanri0s.springstarter.model.FieldErrorMessage;
 import com.juanri0s.springstarter.service.UserJpaService;
-import javafx.application.Application;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +15,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -26,24 +28,44 @@ public class UserJpaController {
 
   @Autowired private UserJpaService userService;
 
+  @ApiOperation(value = "Get user by id")
+  @ApiResponses({@ApiResponse(code = 200, message = "User by id")})
   @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Optional<UserEntity> readOne(@PathVariable @NotEmpty Integer userId) {
+  public Optional<UserEntity> readOne(
+      @ApiParam(value = "The id of the user being searched", defaultValue = "1", example = "1")
+          @PathVariable
+          @NotEmpty
+          Integer userId) {
     return userService.findById(userId);
   }
 
+  @ApiOperation(value = "Get all users")
+  @ApiResponses({@ApiResponse(code = 200, message = "List of all users")})
   @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<UserEntity> readAll() {
     return userService.findAll();
   }
 
-  @PostMapping(value = "/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.CREATED)
+  @ApiOperation(value = "Create user")
+  @ApiResponses({@ApiResponse(code = 201, message = "User created")})
+  @PostMapping(
+      value = "/user",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   public UserEntity create(@Valid @RequestBody UserEntity user) {
     userService.save(user);
     return user;
   }
 
+  @ApiOperation(value = "Delete user by id")
+  @ApiResponses({@ApiResponse(code = 200, message = "User deleted")})
   @DeleteMapping("/user/{userId}")
-  public void delete(@PathVariable @NotEmpty Integer userId) {
+  public void delete(
+      @ApiParam(value = "The id of the user being deleted", defaultValue = "1", example = "1")
+          @PathVariable
+          @NotEmpty
+          Integer userId) {
     userService.deleteById(userId);
   }
 
