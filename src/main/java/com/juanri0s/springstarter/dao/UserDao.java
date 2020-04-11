@@ -2,10 +2,10 @@ package com.juanri0s.springstarter.dao;
 
 import com.juanri0s.springstarter.model.User;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface UserDao {
   void save(User user);
 
-  List<User> findAll();
+  ArrayList<User> findAll();
 }

@@ -28,12 +28,12 @@ public class UserImpl extends JdbcDaoSupport implements UserDao {
   }
 
   @Override
-  public List<User> findAll() {
+  public ArrayList<User> findAll() {
     String sql = "SELECT * FROM TUSER";
     assert getJdbcTemplate() != null;
     List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
 
-    List<User> result = new ArrayList<>();
+    ArrayList<User> result = new ArrayList<>();
     for (Map<String, Object> row : rows) {
       User user = new User();
       user.setFirstName((String) row.get("firstName"));

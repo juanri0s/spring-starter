@@ -4,7 +4,7 @@ import com.juanri0s.springstarter.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Repository
@@ -13,7 +13,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
 
   void deleteById(Integer userId);
 
-  List<UserEntity> findAll();
+  ArrayList<UserEntity> findAll();
 
   Optional<UserEntity> findById(Integer userId);
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,7 @@ public class UserJdbcController {
       value = "/user",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<User> readAll() {
+  public ArrayList<User> getAllUsers() {
     return userService.findAll();
   }
 
@@ -44,7 +45,7 @@ public class UserJdbcController {
         @ApiResponse(code = 400, response = FieldErrorMessage.class, message = "Error with request")
       })
   @PostMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
-  public User create(@Valid @RequestBody User user) {
+  public User creatUser(@Valid @RequestBody User user) {
     userService.save(user);
     return user;
   }

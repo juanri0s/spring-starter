@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class UserJpaController {
   @ApiOperation(value = "Get all users", response = UserEntity.class)
   @ApiResponses({@ApiResponse(code = 200, message = "List of all users")})
   @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<UserEntity> readAll() {
+  public ArrayList<UserEntity> readAll() {
     return userService.findAll();
   }
 

@@ -5,7 +5,7 @@ import com.juanri0s.springstarter.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class UserJdbcImpl implements UserJdbcService {
@@ -16,10 +16,10 @@ public class UserJdbcImpl implements UserJdbcService {
     userDao.save(user);
   }
 
-  public List<User> findAll() {
-    List<User> users = userDao.findAll();
+  public ArrayList<User> findAll() {
+    ArrayList<User> users = userDao.findAll();
     for (User employee : users) {
-//      System.out.println(employee.toString());
+      //      System.out.println(employee.toString());
     }
     return users;
   }
