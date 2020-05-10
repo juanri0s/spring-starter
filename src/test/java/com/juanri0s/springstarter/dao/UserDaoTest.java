@@ -26,26 +26,6 @@ class UserDaoTest {
 
   @Test
   void findAll() {
-//    // given
-//    UserEntity user1 = new UserEntity(1, "test1", "test1");
-//    UserEntity user2 = new UserEntity(2, "test2", "test2");
-//    ArrayList<UserEntity> users = new ArrayList<>();
-//    users.add(user1);
-//    users.add(user2);
-//
-//    Mockito.when(userDao.findAll()).thenReturn(users);
-//
-//    ArrayList<UserEntity> result = userJpaController.findAll();
-//
-//    Assertions.assertThat(result.size()).isEqualTo(2);
-//
-//    Assertions.assertThat(result.get(0).getFirstName()).isEqualTo(user1.getFirstName());
-//    Assertions.assertThat(result.get(1).getFirstName()).isEqualTo(user2.getFirstName());
-//
-//    Assertions.assertThat(result.get(0).getLastName()).isEqualTo(user1.getLastName());
-//    Assertions.assertThat(result.get(1).getLastName()).isEqualTo(user2.getLastName());
-//
-//    Assertions.assertThat(result.get(0).getUserId()).isEqualTo(user1.getUserId());
-//    Assertions.assertThat(result.get(1).getUserId()).isEqualTo(user2.getUserId());
+
   }
 }
