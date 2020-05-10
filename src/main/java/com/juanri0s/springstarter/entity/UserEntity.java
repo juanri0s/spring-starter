@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -18,13 +15,13 @@ import javax.validation.constraints.Size;
 @Table(name = "tuser")
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ApiModel(value = "UserEntity (JPA)", description = "Db Entity for User")
 public class UserEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @JsonIgnore
   @Column(name = "userid", nullable = false)
   private Integer userId;
 

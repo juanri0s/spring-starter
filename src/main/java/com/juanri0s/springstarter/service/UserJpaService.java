@@ -2,12 +2,14 @@ package com.juanri0s.springstarter.service;
 
 import com.juanri0s.springstarter.entity.UserEntity;
 import com.juanri0s.springstarter.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UserJpaService {
 
@@ -17,8 +19,8 @@ public class UserJpaService {
     return userRepository.findAll();
   }
 
-  public void save(UserEntity user) {
-    userRepository.save(user);
+  public UserEntity save(UserEntity user) {
+    return userRepository.save(user);
   }
 
   public Optional<UserEntity> findById(Integer userId) {

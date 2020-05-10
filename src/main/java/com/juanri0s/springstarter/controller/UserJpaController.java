@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +29,16 @@ public class UserJpaController {
 
   @Autowired private UserJpaService userService;
 
+  @GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String Test(
+      @Valid @NotNull @NotEmpty @Size(min = 2) @RequestParam(name = "greeting") String greeting) {
+    return greeting;
+  }
+
   @ApiOperation(value = "Get user by id", response = UserEntity.class)
   @ApiResponses({@ApiResponse(code = 200, message = "User by id")})
   @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Optional<UserEntity> readOne(
+  public Optional<UserEntity> findById(
       @ApiParam(value = "The id of the user being searched", defaultValue = "1", example = "1")
           @PathVariable
           @NotEmpty
@@ -41,7 +49,7 @@ public class UserJpaController {
   @ApiOperation(value = "Get all users", response = UserEntity.class)
   @ApiResponses({@ApiResponse(code = 200, message = "List of all users")})
   @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ArrayList<UserEntity> readAll() {
+  public ArrayList<UserEntity> findAll() {
     return userService.findAll();
   }
 
@@ -49,22 +57,21 @@ public class UserJpaController {
   @ApiOperation(value = "Create user", response = UserEntity.class)
   @ApiResponses(
       value = {
-        @ApiResponse(code = 201, message = "User created"),
+        @ApiResponse(code = 201, response = UserEntity.class, message = "User created"),
         @ApiResponse(code = 400, response = FieldErrorMessage.class, message = "Error with request")
       })
   @PostMapping(
       value = "/user",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public UserEntity create(@Valid @RequestBody UserEntity user) {
-    userService.save(user);
-    return user;
+  public UserEntity save(@Valid @RequestBody UserEntity user) {
+    return userService.save(user);
   }
 
   @ApiOperation(value = "Delete user by id", response = void.class)
   @ApiResponses({@ApiResponse(code = 200, message = "User deleted")})
   @DeleteMapping("/user/{userId}")
-  public void delete(
+  public void deleteById(
       @ApiParam(value = "The id of the user being deleted", defaultValue = "1", example = "1")
           @PathVariable
           @NotEmpty
